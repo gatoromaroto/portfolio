@@ -23,8 +23,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent; /* Removes tap overlay on mobile */
+  -webkit-tap-highlight-color: transparent;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth; /* Smooth jumping to contact section */
 }
 
 body {
@@ -32,14 +36,14 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   min-height: 100vh;
-  position: relative; /* Anchor for absolute top controls */
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4.5rem 1.5rem 3rem;
 }
 
-/* Controls pinned to the top of the page (will NOT follow on scroll) */
+/* Controls pinned to the top (scrolls away naturally) */
 .top-controls {
   position: absolute;
   top: 1.2rem;
@@ -49,9 +53,24 @@ body {
   gap: 0.6rem;
 }
 
+/* Contact Tab Link */
+.control-link {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-main);
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  padding: 0.55rem 0.9rem;
+  border-radius: 9999px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
 .control-btn {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid var(--border);
   background: transparent;
@@ -75,14 +94,14 @@ body {
   text-align: center;
 }
 
-/* Circular Avatar */
+/* Circular Avatar without internal margin/padding gap */
 .avatar-container {
   width: 160px;
   height: 160px;
   margin: 0 auto 1.8rem;
   border-radius: 50%;
-  border: 1.5px solid var(--border);
-  padding: 4px;
+  border: 2px solid var(--border);
+  padding: 0; /* Removed internal gap */
   overflow: hidden;
 }
 
@@ -125,6 +144,12 @@ body {
   margin: 2.2rem 0 1.8rem;
 }
 
+/* Contact Target Div */
+.contact-block {
+  margin-top: 2.2rem;
+  scroll-margin-top: 2rem;
+}
+
 /* Section Header */
 .section-label {
   font-size: 0.75rem;
@@ -163,22 +188,20 @@ body {
   height: 14px;
 }
 
-/* Hover effects only for mouse pointers (prevents sticky button tap on mobile) */
+/* Hover effects for mice only */
 @media (hover: hover) and (pointer: fine) {
-  .control-btn:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-text);
-  }
-
+  .control-btn:hover,
+  .control-link:hover,
   .pill-btn:hover {
     background-color: var(--btn-hover-bg);
     color: var(--btn-hover-text);
   }
 }
 
-/* Subtle click feedback */
+/* Click feedback */
 .pill-btn:active,
-.control-btn:active {
+.control-btn:active,
+.control-link:active {
   transform: scale(0.96);
   opacity: 0.8;
 }

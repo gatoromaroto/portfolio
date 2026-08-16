@@ -12,8 +12,11 @@
 </head>
 <body>
 
-  <!-- Top Controls: Language Switcher & Dark Mode -->
-  <div class="top-controls">
+  <!-- Top Controls (Header) -->
+  <header class="top-controls">
+    <!-- Contact Quick Jump Link -->
+    <a href="#contact" id="nav-contact" class="control-link">CONTATO</a>
+
     <!-- Language Toggle Button -->
     <button id="lang-toggle" aria-label="Mudar idioma / Switch language" class="control-btn lang-btn">
       <span id="lang-label">EN</span>
@@ -31,12 +34,12 @@
         <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
       </svg>
     </button>
-  </div>
+  </header>
 
   <main class="wrapper">
-    <!-- Profile Image -->
+    <!-- Profile Image (No Inner Gap) -->
     <div class="avatar-container">
-      <img src="avatar.png" alt="Afonso H. Gomes Lima" class="avatar" />
+      <img src="avatar.jpg" alt="Afonso H. Gomes Lima" class="avatar" />
     </div>
 
     <!-- Title & Subtitle -->
@@ -70,18 +73,20 @@
       </a>
     </div>
 
-    <!-- Section 2: Contact Links -->
-    <p class="section-label" id="section2-label" style="margin-top: 2rem;">ENTRE EM CONTATO</p>
-    <div class="button-group">
-      <a href="mailto:seu.email@gmail.com" class="pill-btn">
-        <span id="btn-email">ENVIAR E-MAIL</span>
-        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-      </a>
+    <!-- Section 2: Contact Links (Anchor Target) -->
+    <div id="contact" class="contact-block">
+      <p class="section-label" id="section2-label">ENTRE EM CONTATO</p>
+      <div class="button-group">
+        <a href="mailto:seu.email@gmail.com" class="pill-btn">
+          <span id="btn-email">ENVIAR E-MAIL</span>
+          <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
 
-      <a href="https://twitter.com/yourhandle" target="_blank" class="pill-btn">
-        <span>X / TWITTER</span>
-        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-      </a>
+        <a href="https://twitter.com/yourhandle" target="_blank" class="pill-btn">
+          <span>X / TWITTER</span>
+          <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
     </div>
   </main>
 
@@ -107,10 +112,11 @@
       }
     });
 
-    // Language Toggle Translations (PT-BR is default)
+    // Language Toggle Translations
     const translations = {
       pt: {
         tabTitle: "Afonso H. Gomes Lima | Editor de Vídeo",
+        contactNav: "CONTATO",
         role: "EDITOR DE VÍDEO & CRIADOR",
         bio: "Apaixonado por narrativa visual e edição de alta retenção. Com experiência em vídeos longos, ritmo dinâmico para vídeos curtos e motion design, ajudo criadores e marcas a darem vida às suas ideias.",
         section1: "TRABALHOS EM DESTAQUE",
@@ -119,10 +125,11 @@
         color: "COLOR GRADING",
         section2: "ENTRE EM CONTATO",
         email: "ENVIAR E-MAIL",
-        langBtn: "EN" // Shows button to switch to English
+        langBtn: "EN"
       },
       en: {
         tabTitle: "Afonso H. Gomes Lima | Video Editor",
+        contactNav: "CONTACT",
         role: "VIDEO EDITOR & CREATOR",
         bio: "Passionate about visual storytelling and high-retention editing. With experience in long-form narratives, viral short-form pacing, and motion graphics, I help creators and brands bring their ideas to life.",
         section1: "FEATURED WORKS",
@@ -131,7 +138,7 @@
         color: "COLOR GRADING",
         section2: "GET IN TOUCH",
         email: "EMAIL ME",
-        langBtn: "PT" // Shows button to switch back to Portuguese
+        langBtn: "PT"
       }
     };
 
@@ -144,6 +151,7 @@
       const t = translations[currentLang];
 
       document.getElementById("tab-title").innerText = t.tabTitle;
+      document.getElementById("nav-contact").innerText = t.contactNav;
       document.getElementById("role-text").innerText = t.role;
       document.getElementById("bio-text").innerText = t.bio;
       document.getElementById("section1-label").innerText = t.section1;
