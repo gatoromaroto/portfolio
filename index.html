@@ -1,114 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name | Video Editor</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Google Font (Inter for ultra-clean look) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Sticky Navbar -->
-  <header class="navbar">
-    <div class="logo">YOUR NAME</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#shortform">Short-Form</a>
-      <a href="#longform">Long-Form</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <!-- Theme Toggle Button (Top Right) -->
+  <button id="theme-toggle" aria-label="Toggle Dark Mode" class="theme-btn">
+    <!-- Moon Icon (shown in light mode) -->
+    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+    <!-- Sun Icon (shown in dark mode) -->
+    <svg id="sun-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+    </svg>
+  </button>
 
-  <main class="container">
-    <!-- Hero / Intro -->
-    <section id="about" class="hero">
-      <h1>Video Editor & Storyteller</h1>
-      <p>I craft high-retention edits, pacing, and motion graphics for creators and brands.</p>
-      <div class="badges">
-        <span class="badge">Premiere Pro</span>
-        <span class="badge">After Effects</span>
-        <span class="badge">DaVinci Resolve</span>
-        <span class="badge">CapCut Pro</span>
-      </div>
-    </section>
+  <main class="wrapper">
+    <!-- Profile Image -->
+    <div class="avatar-container">
+      <!-- Put your image as avatar.jpg in the same folder -->
+      <img src="avatar.jpg" alt="Profile Picture" class="avatar" />
+    </div>
 
-    <!-- Short-Form Section (Reels/TikTok 9:16) -->
-    <section id="shortform" class="section">
-      <h2>Short-Form Edits (9:16)</h2>
-      <div class="grid vertical-grid">
-        
-        <!-- Card 1 -->
-        <div class="card">
-          <div class="video-container vertical">
-            <!-- Replace with your YouTube Shorts / TikTok embed or unlisted video -->
-            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-          </div>
-          <div class="card-body">
-            <h3>Viral Hook Edit</h3>
-            <p>Sound design, kinetic typography, pacing.</p>
-          </div>
-        </div>
+    <!-- Title & Subtitle -->
+    <h1 class="name">YOUR NAME</h1>
+    <p class="role">VIDEO EDITOR & CREATOR</p>
 
-        <!-- Card 2 -->
-        <div class="card">
-          <div class="video-container vertical">
-            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-          </div>
-          <div class="card-body">
-            <h3>Talking Head / Educational</h3>
-            <p>B-roll insertion, color grading, clean captions.</p>
-          </div>
-        </div>
+    <!-- Bio Paragraph -->
+    <p class="bio">
+      Passionate about visual storytelling and high-retention editing. With experience in long-form narratives, viral short-form pacing, and motion graphics, I help creators and brands bring their ideas to life.
+    </p>
 
-      </div>
-    </section>
+    <!-- Divider Line -->
+    <hr class="divider" />
 
-    <!-- Long-Form Section (YouTube 16:9) -->
-    <section id="longform" class="section">
-      <h2>Long-Form Edits (16:9)</h2>
-      <div class="grid horizontal-grid">
-        
-        <!-- Card 1 -->
-        <div class="card">
-          <div class="video-container horizontal">
-            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-          </div>
-          <div class="card-body">
-            <h3>Documentary Style Video Essay</h3>
-            <p>Custom sound design, map animations, color correction.</p>
-          </div>
-        </div>
+    <!-- Section 1: Featured Links / Projects -->
+    <p class="section-label">FEATURED WORKS</p>
+    <div class="button-group">
+      <a href="https://youtube.com" target="_blank" class="pill-btn">
+        SHOWREEL 2026
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
 
-        <!-- Card 2 -->
-        <div class="card">
-          <div class="video-container horizontal">
-            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-          </div>
-          <div class="card-body">
-            <h3>Gaming / Vlog Retention Edit</h3>
-            <p>Fast-paced cuts, sound effects, meme tracking.</p>
-          </div>
-        </div>
+      <a href="https://drive.google.com" target="_blank" class="pill-btn">
+        SHORT-FORM EDITS
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
 
-      </div>
-    </section>
+      <a href="https://behance.net" target="_blank" class="pill-btn">
+        COLOR GRADING
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-      <h2>Let's Work Together</h2>
-      <p>Need edits for your channel or brand? Send me a message:</p>
-      <div class="contact-links">
-        <a href="mailto:your.email@gmail.com" class="btn primary-btn">Email Me</a>
-        <a href="https://twitter.com/yourhandle" target="_blank" class="btn">Twitter / X</a>
-        <a href="https://instagram.com/yourhandle" target="_blank" class="btn">Instagram</a>
-      </div>
-    </section>
+    <!-- Section 2: Contact Links -->
+    <p class="section-label" style="margin-top: 2rem;">GET IN TOUCH</p>
+    <div class="button-group">
+      <a href="mailto:your.email@gmail.com" class="pill-btn">
+        EMAIL ME
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+
+      <a href="https://twitter.com/yourhandle" target="_blank" class="pill-btn">
+        X / TWITTER
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2026 Your Name. Built with GitHub Pages.</p>
-  </footer>
+  <script>
+    // Theme toggle script
+    const toggleBtn = document.getElementById("theme-toggle");
+    const moonIcon = document.getElementById("moon-icon");
+    const sunIcon = document.getElementById("sun-icon");
+    const htmlElement = document.documentElement;
 
-  <script src="script.js"></script>
+    toggleBtn.addEventListener("click", () => {
+      const currentTheme = htmlElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      
+      htmlElement.setAttribute("data-theme", newTheme);
+      
+      if (newTheme === "dark") {
+        moonIcon.style.display = "none";
+        sunIcon.style.display = "block";
+      } else {
+        moonIcon.style.display = "block";
+        sunIcon.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
