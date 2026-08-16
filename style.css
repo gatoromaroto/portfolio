@@ -23,6 +23,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -34,36 +35,34 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem 1.5rem;
+  padding: 5rem 1.5rem 3rem; /* Top padding prevents overlap on mobile */
 }
 
-/* Top Right Controls Group */
+/* Top Right Controls Group (Fixed on Top) */
 .top-controls {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1.2rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  z-index: 50;
+  z-index: 1000;
+  background: var(--bg); /* Blends with background */
+  padding: 0.3rem;
+  border-radius: 9999px;
 }
 
 .control-btn {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   background: transparent;
   color: var(--text-main);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.control-btn:hover {
-  background-color: var(--btn-hover-bg);
-  color: var(--btn-hover-text);
 }
 
 .lang-btn {
@@ -77,13 +76,14 @@ body {
   max-width: 620px;
   width: 100%;
   text-align: center;
+  margin-top: 1rem;
 }
 
 /* Circular Avatar */
 .avatar-container {
-  width: 170px;
-  height: 170px;
-  margin: 0 auto 2rem;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1.8rem;
   border-radius: 50%;
   border: 1.5px solid var(--border);
   padding: 4px;
@@ -100,7 +100,7 @@ body {
 
 /* Typography */
 .name {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 900;
   letter-spacing: -0.5px;
   margin-bottom: 0.4rem;
@@ -126,7 +126,7 @@ body {
 .divider {
   border: none;
   border-top: 1px solid var(--divider);
-  margin: 2.5rem 0 1.8rem;
+  margin: 2.2rem 0 1.8rem;
 }
 
 /* Section Header */
@@ -159,14 +159,57 @@ body {
   padding: 0.65rem 1.4rem;
   border-radius: 9999px;
   background: transparent;
-}
-
-.pill-btn:hover {
-  background-color: var(--btn-hover-bg);
-  color: var(--btn-hover-text);
+  user-select: none;
 }
 
 .external-icon {
   width: 14px;
   height: 14px;
+}
+
+/* =======================================================
+   HOVER ONLY FOR DESKTOP MICE (Fixes sticky tap on mobile)
+   ======================================================= */
+@media (hover: hover) and (pointer: fine) {
+  .control-btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+  }
+
+  .pill-btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+  }
+}
+
+/* Quick feedback on tap (active state) */
+.pill-btn:active,
+.control-btn:active {
+  transform: scale(0.96);
+  opacity: 0.8;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  body {
+    padding-top: 5.5rem; /* Leaves room for fixed top buttons */
+  }
+
+  .name {
+    font-size: 1.65rem;
+  }
+
+  .avatar-container {
+    width: 140px;
+    height: 140px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pill-btn {
+    justify-content: center;
+  }
 }
