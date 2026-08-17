@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="tab-title">Afonso H. Gomes Lima | Editor de Vídeo</title>
 
-  <!-- Favicon Links (Favicon.io bundle) -->
+  <!-- Favicon Links -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -23,7 +23,6 @@
 
   <!-- Top Controls (Header) -->
   <header class="top-controls">
-    <!-- Contact Quick Jump Link -->
     <a href="#contact" id="nav-contact" class="control-link">CONTATO</a>
 
     <!-- Language Toggle Button -->
@@ -33,11 +32,9 @@
 
     <!-- Theme Toggle Button -->
     <button id="theme-toggle" aria-label="Toggle Dark Mode" class="control-btn">
-      <!-- Moon Icon (shown in light mode) -->
       <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
       </svg>
-      <!-- Sun Icon (shown in dark mode) -->
       <svg id="sun-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="4"></circle>
         <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
@@ -46,7 +43,7 @@
   </header>
 
   <main class="wrapper">
-    <!-- Profile Image (avatar.png) -->
+    <!-- Profile Image -->
     <div class="avatar-container">
       <img src="avatar.png" alt="Afonso H. Gomes Lima" class="avatar" />
     </div>
@@ -81,6 +78,91 @@
         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
       </a>
     </div>
+
+    <!-- Divider Line -->
+    <hr class="divider" />
+
+    <!-- ============================================== -->
+    <!-- 3D SPINNING CAROUSEL (REPORTS / CLIENT STORIES) -->
+    <!-- ============================================== -->
+    <section class="carousel-section">
+      <p class="section-label" id="section-carousel-label">CASOS DE SUCESSO & FEEDBACK</p>
+      
+      <div class="carousel-viewport" id="carousel-viewport">
+        <div class="carousel-ring" id="carousel-ring">
+          
+          <!-- Card 1 -->
+          <div class="carousel-card">
+            <div class="card-header">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Client 1" class="card-avatar" />
+              <div class="card-meta">
+                <h4 class="card-name">Lucas Mendes</h4>
+                <p class="card-role" id="card-role-1">YouTuber Tech (+450k)</p>
+              </div>
+            </div>
+            <hr class="card-divider" />
+            <p class="card-story" id="card-story-1">
+              "A retenção dos meus vídeos subiu de 38% para 56% no primeiro mês. O ritmo e o design de som que o Afonso adiciona mudaram de nível meu canal!"
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="carousel-card">
+            <div class="card-header">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Client 2" class="card-avatar" />
+              <div class="card-meta">
+                <h4 class="card-name">Gabriel Silva</h4>
+                <p class="card-role" id="card-role-2">Produtor de Infoproduto</p>
+              </div>
+            </div>
+            <hr class="card-divider" />
+            <p class="card-story" id="card-story-2">
+              "Fizemos uma campanha de Reels para lançamento e tivemos mais de 1.8M de views orgânicos com os ganchos visuais e legendas dinâmicas."
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="carousel-card">
+            <div class="card-header">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" alt="Client 3" class="card-avatar" />
+              <div class="card-meta">
+                <h4 class="card-name">Mariana Costa</h4>
+                <p class="card-role" id="card-role-3">Criadora de Conteúdo & Lifestyle</p>
+              </div>
+            </div>
+            <hr class="card-divider" />
+            <p class="card-story" id="card-story-3">
+              "Edição extremamente limpa, entrega sempre no prazo e compreensão impecável da estética que eu buscava para minha marca pessoal."
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="carousel-card">
+            <div class="card-header">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="Client 4" class="card-avatar" />
+              <div class="card-meta">
+                <h4 class="card-name">Rodrigo Lima</h4>
+                <p class="card-role" id="card-role-4">Host de Podcast</p>
+              </div>
+            </div>
+            <hr class="card-divider" />
+            <p class="card-story" id="card-story-4">
+              "Os cortes virais que ele extraiu dos episódios trouxeram milhares de novos inscritos toda semana. O domínio de pacing é absurdo."
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controls for Carousel -->
+      <div class="carousel-nav">
+        <button id="prev-btn" class="nav-arrow-btn" aria-label="Previous card">‹</button>
+        <button id="next-btn" class="nav-arrow-btn" aria-label="Next card">›</button>
+      </div>
+    </section>
+
+    <!-- Divider Line -->
+    <hr class="divider" />
 
     <!-- Section 2: Contact Links (Anchor Target) -->
     <div id="contact" class="contact-block">
@@ -121,7 +203,7 @@
       }
     });
 
-    // Language Toggle Translations (PT-BR is default)
+    // Language Toggle Translations (PT-BR default)
     const translations = {
       pt: {
         tabTitle: "Afonso H. Gomes Lima | Editor de Vídeo",
@@ -132,6 +214,15 @@
         showreel: "SHOWREEL",
         shortform: "VÍDEOS CURTOS (REELS / TIKTOK)",
         color: "COLOR GRADING",
+        carouselSection: "CASOS DE SUCESSO & FEEDBACK",
+        cardRole1: "YouTuber Tech (+450k)",
+        cardStory1: '"A retenção dos meus vídeos subiu de 38% para 56% no primeiro mês. O ritmo e o design de som que o Afonso adiciona mudaram de nível meu canal!"',
+        cardRole2: "Produtor de Infoproduto",
+        cardStory2: '"Fizemos uma campanha de Reels para lançamento e tivemos mais de 1.8M de views orgânicos com os ganchos visuais e legendas dinâmicas."',
+        cardRole3: "Criadora de Conteúdo & Lifestyle",
+        cardStory3: '"Edição extremamente limpa, entrega sempre no prazo e compreensão impecável da estética que eu buscava para minha marca pessoal."',
+        cardRole4: "Host de Podcast",
+        cardStory4: '"Os cortes virais que ele extraiu dos episódios trouxeram milhares de novos inscritos toda semana. O domínio de pacing é absurdo."',
         section2: "ENTRE EM CONTATO",
         email: "ENVIAR E-MAIL",
         langBtn: "EN"
@@ -145,6 +236,15 @@
         showreel: "SHOWREEL",
         shortform: "SHORT-FORM EDITS",
         color: "COLOR GRADING",
+        carouselSection: "CLIENT STORIES & FEEDBACK",
+        cardRole1: "Tech YouTuber (+450k)",
+        cardStory1: '"My video retention jumped from 38% to 56% in the first month. The pacing and sound design Afonso adds completely elevated my channel!"',
+        cardRole2: "Digital Product Creator",
+        cardStory2: '"We ran a short-form launch campaign and hit over 1.8M organic views thanks to the visual hooks and kinetic typography."',
+        cardRole3: "Content Creator & Lifestyle",
+        cardStory3: '"Super clean edits, always delivered on schedule, and an impeccable grasp of the aesthetic I envisioned for my personal brand."',
+        cardRole4: "Podcast Host",
+        cardStory4: '"The viral short-form cuts he extracted brought thousands of new subscribers weekly. His sense of retention pacing is remarkable."',
         section2: "GET IN TOUCH",
         email: "EMAIL ME",
         langBtn: "PT"
@@ -167,11 +267,76 @@
       document.getElementById("btn-showreel").innerText = t.showreel;
       document.getElementById("btn-shortform").innerText = t.shortform;
       document.getElementById("btn-color").innerText = t.color;
+      document.getElementById("section-carousel-label").innerText = t.carouselSection;
+      
+      document.getElementById("card-role-1").innerText = t.cardRole1;
+      document.getElementById("card-story-1").innerText = t.cardStory1;
+      document.getElementById("card-role-2").innerText = t.cardRole2;
+      document.getElementById("card-story-2").innerText = t.cardStory2;
+      document.getElementById("card-role-3").innerText = t.cardRole3;
+      document.getElementById("card-story-3").innerText = t.cardStory3;
+      document.getElementById("card-role-4").innerText = t.cardRole4;
+      document.getElementById("card-story-4").innerText = t.cardStory4;
+
       document.getElementById("section2-label").innerText = t.section2;
       document.getElementById("btn-email").innerText = t.email;
       
       langLabel.innerText = t.langBtn;
       htmlElement.setAttribute("lang", currentLang === "pt" ? "pt-br" : "en");
+    });
+
+    // ==============================================
+    // 3D CAROUSEL SCRIPT LOGIC
+    // ==============================================
+    const ring = document.getElementById("carousel-ring");
+    const viewport = document.getElementById("carousel-viewport");
+    const cards = document.querySelectorAll(".carousel-card");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    const totalCards = cards.length;
+    let currentAngle = 0;
+    const angleStep = 360 / totalCards;
+    
+    // Radius distance for 3D depth
+    const radius = Math.round((280 / 2) / Math.tan(Math.PI / totalCards)) + 20;
+
+    // Arrange cards in 3D circle
+    cards.forEach((card, index) => {
+      const cardAngle = index * angleStep;
+      card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
+    });
+
+    function updateCarousel() {
+      ring.style.transform = `rotateY(${currentAngle}deg)`;
+    }
+
+    function rotateNext() {
+      currentAngle -= angleStep;
+      updateCarousel();
+    }
+
+    function rotatePrev() {
+      currentAngle += angleStep;
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener("click", rotateNext);
+    prevBtn.addEventListener("click", rotatePrev);
+
+    // Auto-spin interval
+    let autoSpin = setInterval(rotateNext, 3800);
+
+    // Pause on hover or touch
+    viewport.addEventListener("mouseenter", () => clearInterval(autoSpin));
+    viewport.addEventListener("mouseleave", () => {
+      clearInterval(autoSpin);
+      autoSpin = setInterval(rotateNext, 3800);
+    });
+    viewport.addEventListener("touchstart", () => clearInterval(autoSpin), { passive: true });
+    viewport.addEventListener("touchend", () => {
+      clearInterval(autoSpin);
+      autoSpin = setInterval(rotateNext, 3800);
     });
   </script>
 </body>

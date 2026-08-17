@@ -4,9 +4,11 @@
   --text-main: #000000;
   --text-muted: #555555;
   --border: #000000;
+  --card-bg: #f8fafc;
   --divider: #e5e7eb;
   --btn-hover-bg: #000000;
   --btn-hover-text: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.06);
 }
 
 :root[data-theme="dark"] {
@@ -14,9 +16,11 @@
   --text-main: #ffffff;
   --text-muted: #a1a1aa;
   --border: #ffffff;
+  --card-bg: #18181b;
   --divider: #27272a;
   --btn-hover-bg: #ffffff;
   --btn-hover-text: #000000;
+  --card-shadow: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -28,7 +32,7 @@
 }
 
 html {
-  scroll-behavior: smooth; /* Smooth jumping to contact section */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,9 +45,10 @@ body {
   justify-content: center;
   align-items: center;
   padding: 4.5rem 1.5rem 3rem;
+  overflow-x: hidden;
 }
 
-/* Controls pinned to the top (scrolls away naturally) */
+/* Controls pinned to the top */
 .top-controls {
   position: absolute;
   top: 1.2rem;
@@ -53,7 +58,6 @@ body {
   gap: 0.6rem;
 }
 
-/* Contact Tab Link */
 .control-link {
   font-size: 0.75rem;
   font-weight: 800;
@@ -94,14 +98,14 @@ body {
   text-align: center;
 }
 
-/* Circular Avatar without internal margin/padding gap */
+/* Circular Avatar */
 .avatar-container {
   width: 160px;
   height: 160px;
   margin: 0 auto 1.8rem;
   border-radius: 50%;
   border: 2px solid var(--border);
-  padding: 0; /* Removed internal gap */
+  padding: 0;
   overflow: hidden;
 }
 
@@ -144,12 +148,6 @@ body {
   margin: 2.2rem 0 1.8rem;
 }
 
-/* Contact Target Div */
-.contact-block {
-  margin-top: 2.2rem;
-  scroll-margin-top: 2rem;
-}
-
 /* Section Header */
 .section-label {
   font-size: 0.75rem;
@@ -188,11 +186,130 @@ body {
   height: 14px;
 }
 
-/* Hover effects for mice only */
+/* ==============================================
+   3D CAROUSEL STYLES
+   ============================================== */
+.carousel-section {
+  width: 100%;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-viewport {
+  width: 100%;
+  height: 250px;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-ring {
+  width: 270px;
+  height: 210px;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.carousel-card {
+  position: absolute;
+  width: 270px;
+  min-height: 200px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1.1rem;
+  text-align: left;
+  box-shadow: 0 10px 25px var(--card-shadow);
+  backface-visibility: hidden;
+  user-select: none;
+}
+
+/* Card Header with Squared Round-Corner Avatar */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.card-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px; /* Squircle rounded corners */
+  object-fit: cover;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.card-meta {
+  overflow: hidden;
+}
+
+.card-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-role {
+  font-size: 0.75rem;
+  font-weight: 400; /* Less bold */
+  color: var(--text-muted);
+}
+
+.card-divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin: 0.8rem 0;
+}
+
+.card-story {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Carousel Navigation Arrows */
+.carousel-nav {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.nav-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-main);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Contact Block */
+.contact-block {
+  scroll-margin-top: 2rem;
+}
+
+/* Hover effects for mice */
 @media (hover: hover) and (pointer: fine) {
   .control-btn:hover,
   .control-link:hover,
-  .pill-btn:hover {
+  .pill-btn:hover,
+  .nav-arrow-btn:hover {
     background-color: var(--btn-hover-bg);
     color: var(--btn-hover-text);
   }
@@ -201,8 +318,9 @@ body {
 /* Click feedback */
 .pill-btn:active,
 .control-btn:active,
-.control-link:active {
-  transform: scale(0.96);
+.control-link:active,
+.nav-arrow-btn:active {
+  transform: scale(0.95);
   opacity: 0.8;
 }
 
@@ -228,5 +346,9 @@ body {
 
   .pill-btn {
     justify-content: center;
+  }
+
+  .carousel-ring, .carousel-card {
+    width: 250px;
   }
 }
