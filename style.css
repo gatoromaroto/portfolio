@@ -20,7 +20,7 @@
   --divider: #27272a;
   --btn-hover-bg: #ffffff;
   --btn-hover-text: #000000;
-  --card-shadow: rgba(0, 0, 0, 0.5);
+  --card-shadow: rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -28,14 +28,12 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* PC-Safe Centered Layout */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);
@@ -44,13 +42,14 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Aligns correctly without clipping tall content */
+  align-items: center;
   justify-content: flex-start;
   padding: 5rem 1.5rem 4rem;
   overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Top Controls Pinned to Top */
+/* Top Controls */
 .top-controls {
   position: absolute;
   top: 1.2rem;
@@ -58,7 +57,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  z-index: 50;
+  z-index: 100;
 }
 
 .control-link {
@@ -73,6 +72,7 @@ body {
   background: transparent;
   display: flex;
   align-items: center;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .control-btn {
@@ -86,6 +86,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .lang-btn {
@@ -145,7 +146,7 @@ body {
   margin: 0 auto;
 }
 
-/* Divider */
+/* Dividers */
 .divider {
   border: none;
   border-top: 1px solid var(--divider);
@@ -183,6 +184,7 @@ body {
   border-radius: 9999px;
   background: transparent;
   user-select: none;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .external-icon {
@@ -190,9 +192,9 @@ body {
   height: 14px;
 }
 
-/* ==============================================
-   3D CAROUSEL (Desktop & Mobile Optimized)
-   ============================================== */
+/* ========================================================
+   3D CAROUSEL (LOCKED TO CENTER ORIGIN)
+   ======================================================== */
 .carousel-section {
   width: 100%;
   margin: 1.5rem 0;
@@ -203,15 +205,15 @@ body {
 
 .carousel-viewport {
   width: 100%;
-  max-width: 480px;
-  height: 250px;
-  perspective: 1100px;
+  height: 230px;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: grab;
-  touch-action: pan-y; /* Allows natural vertical page scroll while capturing horizontal drag */
+  touch-action: pan-y;
   user-select: none;
 }
 
@@ -220,25 +222,31 @@ body {
 }
 
 .carousel-ring {
-  width: 270px;
-  height: 200px;
-  position: absolute;
+  width: 290px;
+  height: 185px;
+  position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .carousel-card {
   position: absolute;
-  width: 270px;
-  min-height: 195px;
+  top: 0;
+  left: 0;
+  width: 290px;
+  height: 185px;
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 16px;
-  padding: 1.1rem;
+  padding: 1rem;
   text-align: left;
   box-shadow: 0 8px 24px var(--card-shadow);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-header {
@@ -248,8 +256,8 @@ body {
 }
 
 .card-avatar {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   object-fit: cover;
   border: 1.5px solid var(--border);
@@ -279,17 +287,17 @@ body {
 .card-divider {
   border: none;
   border-top: 1px solid var(--divider);
-  margin: 0.75rem 0;
+  margin: 0.5rem 0;
 }
 
 .card-story {
-  font-size: 0.82rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: var(--text-muted);
   font-style: italic;
 }
 
-/* Carousel Navigation Arrows */
+/* Navigation Buttons */
 .carousel-nav {
   display: flex;
   gap: 0.8rem;
@@ -309,14 +317,14 @@ body {
   align-items: center;
   justify-content: center;
   line-height: 1;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-/* Contact Block */
 .contact-block {
   scroll-margin-top: 2rem;
 }
 
-/* Desktop Hover Styles */
+/* Hover effects for mice */
 @media (hover: hover) and (pointer: fine) {
   .control-btn:hover,
   .control-link:hover,
@@ -327,7 +335,7 @@ body {
   }
 }
 
-/* Active Press Feedback */
+/* Tap feedback */
 .pill-btn:active,
 .control-btn:active,
 .control-link:active,
@@ -361,6 +369,7 @@ body {
   }
 
   .carousel-ring, .carousel-card {
-    width: 250px;
+    width: 260px;
+    height: 190px;
   }
 }

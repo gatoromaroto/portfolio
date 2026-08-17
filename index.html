@@ -25,12 +25,10 @@
   <header class="top-controls">
     <a href="#contact" id="nav-contact" class="control-link">CONTATO</a>
 
-    <!-- Language Toggle Button -->
     <button id="lang-toggle" aria-label="Mudar idioma / Switch language" class="control-btn lang-btn">
       <span id="lang-label">EN</span>
     </button>
 
-    <!-- Theme Toggle Button -->
     <button id="theme-toggle" aria-label="Toggle Dark Mode" class="control-btn">
       <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
@@ -82,9 +80,7 @@
     <!-- Divider Line -->
     <hr class="divider" />
 
-    <!-- ============================================== -->
-    <!-- 3D SPINNING & SWIPABLE CAROUSEL -->
-    <!-- ============================================== -->
+    <!-- 3D CAROUSEL -->
     <section class="carousel-section">
       <p class="section-label" id="section-carousel-label">CASOS DE SUCESSO & FEEDBACK</p>
       
@@ -154,7 +150,7 @@
         </div>
       </div>
 
-      <!-- Carousel Navigation Arrows -->
+      <!-- Navigation Arrows -->
       <div class="carousel-nav">
         <button id="prev-btn" class="nav-arrow-btn" aria-label="Previous card">‹</button>
         <button id="next-btn" class="nav-arrow-btn" aria-label="Next card">›</button>
@@ -164,7 +160,7 @@
     <!-- Divider Line -->
     <hr class="divider" />
 
-    <!-- Section 2: Contact Links (Anchor Target) -->
+    <!-- Contact Block -->
     <div id="contact" class="contact-block">
       <p class="section-label" id="section2-label">ENTRE EM CONTATO</p>
       <div class="button-group">
@@ -203,7 +199,7 @@
       }
     });
 
-    // Language Toggle Translations (PT-BR default)
+    // Language Toggle Translations
     const translations = {
       pt: {
         tabTitle: "Afonso H. Gomes Lima | Editor de Vídeo",
@@ -285,9 +281,9 @@
       htmlElement.setAttribute("lang", currentLang === "pt" ? "pt-br" : "en");
     });
 
-    // ==============================================
-    // 3D SWIPABLE CAROUSEL LOGIC
-    // ==============================================
+    // ========================================================
+    // 3D CAROUSEL SCRIPT LOGIC
+    // ========================================================
     const ring = document.getElementById("carousel-ring");
     const viewport = document.getElementById("carousel-viewport");
     const cards = document.querySelectorAll(".carousel-card");
@@ -297,9 +293,9 @@
     const totalCards = cards.length;
     let currentAngle = 0;
     const angleStep = 360 / totalCards;
-    const radius = 190; // Optimized radius for clear 3D perspective
+    const radius = 220; // 3D distance
 
-    // Position cards in circle
+    // Setup 3D angle for each card
     cards.forEach((card, index) => {
       const cardAngle = index * angleStep;
       card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
@@ -312,7 +308,7 @@
     let autoSpin;
     function resetAutoSpin() {
       clearInterval(autoSpin);
-      autoSpin = setInterval(rotateNext, 4200);
+      autoSpin = setInterval(rotateNext, 4500);
     }
 
     function rotateNext() {
@@ -325,7 +321,6 @@
       updateCarousel();
     }
 
-    // Button clicks with timer reset
     nextBtn.addEventListener("click", () => {
       rotateNext();
       resetAutoSpin();
@@ -336,30 +331,31 @@
       resetAutoSpin();
     });
 
-    // Start auto spin
     resetAutoSpin();
 
-    // ==============================================
-    // DRAG / SWIPE INTERACTION (Desktop Mouse & Touch)
-    // ==============================================
+    // ========================================================
+    // SWIPE / DRAG LOGIC (Correct Direction & 70px Threshold)
+    // ========================================================
     let isDragging = false;
     let startX = 0;
     let startAngle = 0;
+    const SWIPE_THRESHOLD = 70; // Requires 70px intentional swipe
 
     viewport.addEventListener("pointerdown", (e) => {
       isDragging = true;
       startX = e.clientX;
       startAngle = currentAngle;
       clearInterval(autoSpin);
-      ring.style.transition = "none"; // Instant response during drag
+      ring.style.transition = "none";
       viewport.setPointerCapture(e.pointerId);
     });
 
     viewport.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
       const deltaX = e.clientX - startX;
-      const sensitivity = 0.45;
-      const tempAngle = startAngle + deltaX * sensitivity;
+      // Real-time drag feedback
+      const sensitivity = 0.35;
+      const tempAngle = startAngle + (deltaX * sensitivity);
       ring.style.transform = `rotateY(${tempAngle}deg)`;
     });
 
@@ -369,13 +365,15 @@
       ring.style.transition = "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)";
       const deltaX = e.clientX - startX;
       
-      if (deltaX < -40) {
-        currentAngle -= angleStep;
-      } else if (deltaX > 40) {
+      // Swipe Right (deltaX > 70) => Previous Card
+      // Swipe Left (deltaX < -70) => Next Card
+      if (deltaX > SWIPE_THRESHOLD) {
         currentAngle += angleStep;
+      } else if (deltaX < -SWIPE_THRESHOLD) {
+        currentAngle -= angleStep;
       }
       
-      // Snap to nearest clean card face
+      // Snap to exact card angle
       currentAngle = Math.round(currentAngle / angleStep) * angleStep;
       updateCarousel();
       resetAutoSpin();
