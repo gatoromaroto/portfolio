@@ -72,6 +72,7 @@ body {
   background: transparent;
   display: flex;
   align-items: center;
+  white-space: nowrap;
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -95,9 +96,9 @@ body {
   font-weight: 800;
 }
 
-/* Main Container */
+/* Main Container (widened to 700px so all 3 buttons fit on one line) */
 .wrapper {
-  max-width: 620px;
+  max-width: 700px;
   width: 100%;
   text-align: center;
   margin: 0 auto;
@@ -142,7 +143,7 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-muted);
-  max-width: 520px;
+  max-width: 540px;
   margin: 0 auto;
 }
 
@@ -162,34 +163,37 @@ body {
   margin-bottom: 1.2rem;
 }
 
-/* Pill Buttons */
+/* Pill Buttons (white-space: nowrap keeps text on 1 line) */
 .button-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.8rem;
+  align-items: center;
+  gap: 0.7rem;
 }
 
 .pill-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
+  gap: 7px;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.5px;
   color: var(--text-main);
   text-decoration: none;
   border: 2px solid var(--border);
-  padding: 0.65rem 1.4rem;
+  padding: 0.65rem 1.25rem;
   border-radius: 9999px;
   background: transparent;
   user-select: none;
+  white-space: nowrap; /* Prevents text from breaking into 2 lines */
   transition: background-color 0.2s, color 0.2s;
 }
 
-.external-icon {
-  width: 14px;
-  height: 14px;
+.icon-svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 /* ========================================================
@@ -324,7 +328,7 @@ body {
   scroll-margin-top: 2rem;
 }
 
-/* Desktop Hover Styles */
+/* Hover effects for mice */
 @media (hover: hover) and (pointer: fine) {
   .control-btn:hover,
   .control-link:hover,
@@ -335,7 +339,7 @@ body {
   }
 }
 
-/* Active Press Feedback */
+/* Active feedback */
 .pill-btn:active,
 .control-btn:active,
 .control-link:active,
@@ -345,7 +349,7 @@ body {
 }
 
 /* Mobile Adjustments */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   body {
     padding-top: 5rem;
   }
