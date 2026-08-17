@@ -193,7 +193,7 @@ body {
 }
 
 /* ========================================================
-   3D CAROUSEL (LOCKED TO CENTER ORIGIN)
+   3D CAROUSEL
    ======================================================== */
 .carousel-section {
   width: 100%;
@@ -324,7 +324,7 @@ body {
   scroll-margin-top: 2rem;
 }
 
-/* Hover effects for mice */
+/* Desktop Hover Styles */
 @media (hover: hover) and (pointer: fine) {
   .control-btn:hover,
   .control-link:hover,
@@ -335,7 +335,7 @@ body {
   }
 }
 
-/* Tap feedback */
+/* Active Press Feedback */
 .pill-btn:active,
 .control-btn:active,
 .control-link:active,

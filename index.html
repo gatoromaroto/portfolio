@@ -80,7 +80,7 @@
     <!-- Divider Line -->
     <hr class="divider" />
 
-    <!-- 3D CAROUSEL -->
+    <!-- 3D Swipable Carousel -->
     <section class="carousel-section">
       <p class="section-label" id="section-carousel-label">CASOS DE SUCESSO & FEEDBACK</p>
       
@@ -282,7 +282,7 @@
     });
 
     // ========================================================
-    // 3D CAROUSEL SCRIPT LOGIC
+    // 3D CAROUSEL (SMART SWIPE & NATURAL VERTICAL SCROLL)
     // ========================================================
     const ring = document.getElementById("carousel-ring");
     const viewport = document.getElementById("carousel-viewport");
@@ -293,9 +293,9 @@
     const totalCards = cards.length;
     let currentAngle = 0;
     const angleStep = 360 / totalCards;
-    const radius = 220; // 3D distance
+    const radius = 220; // 3D distance radius
 
-    // Setup 3D angle for each card
+    // Set 3D position for each card
     cards.forEach((card, index) => {
       const cardAngle = index * angleStep;
       card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
@@ -333,50 +333,73 @@
 
     resetAutoSpin();
 
-    // ========================================================
-    // SWIPE / DRAG LOGIC (Correct Direction & 70px Threshold)
-    // ========================================================
-    let isDragging = false;
+    // Gestures logic: allow page scroll on vertical, rotate carousel on horizontal
+    let isTracking = false;
+    let isHorizontalSwipe = false;
     let startX = 0;
+    let startY = 0;
     let startAngle = 0;
-    const SWIPE_THRESHOLD = 70; // Requires 70px intentional swipe
+    const SWIPE_THRESHOLD = 60;
+    const LOCK_DIRECTION_THRESHOLD = 10;
 
     viewport.addEventListener("pointerdown", (e) => {
-      isDragging = true;
+      isTracking = true;
+      isHorizontalSwipe = false;
       startX = e.clientX;
+      startY = e.clientY;
       startAngle = currentAngle;
-      clearInterval(autoSpin);
-      ring.style.transition = "none";
-      viewport.setPointerCapture(e.pointerId);
     });
 
     viewport.addEventListener("pointermove", (e) => {
-      if (!isDragging) return;
+      if (!isTracking) return;
+
       const deltaX = e.clientX - startX;
-      // Real-time drag feedback
-      const sensitivity = 0.35;
-      const tempAngle = startAngle + (deltaX * sensitivity);
-      ring.style.transform = `rotateY(${tempAngle}deg)`;
+      const deltaY = e.clientY - startY;
+
+      if (!isHorizontalSwipe) {
+        if (Math.abs(deltaY) > LOCK_DIRECTION_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX)) {
+          // Vertical movement detected: yield to natural page scrolling
+          isTracking = false;
+          return;
+        } else if (Math.abs(deltaX) > LOCK_DIRECTION_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+          // Horizontal movement detected: lock to 3D carousel
+          isHorizontalSwipe = true;
+          clearInterval(autoSpin);
+          ring.style.transition = "none";
+          try {
+            viewport.setPointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+      }
+
+      if (isHorizontalSwipe) {
+        const sensitivity = 0.35;
+        const tempAngle = startAngle + (deltaX * sensitivity);
+        ring.style.transform = `rotateY(${tempAngle}deg)`;
+      }
     });
 
     const handlePointerEnd = (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      ring.style.transition = "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)";
-      const deltaX = e.clientX - startX;
-      
-      // Swipe Right (deltaX > 70) => Previous Card
-      // Swipe Left (deltaX < -70) => Next Card
-      if (deltaX > SWIPE_THRESHOLD) {
-        currentAngle += angleStep;
-      } else if (deltaX < -SWIPE_THRESHOLD) {
-        currentAngle -= angleStep;
+      if (!isTracking && !isHorizontalSwipe) return;
+
+      if (isHorizontalSwipe) {
+        ring.style.transition = "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)";
+        const deltaX = e.clientX - startX;
+
+        // Swipe Right -> Previous Card | Swipe Left -> Next Card
+        if (deltaX > SWIPE_THRESHOLD) {
+          currentAngle += angleStep;
+        } else if (deltaX < -SWIPE_THRESHOLD) {
+          currentAngle -= angleStep;
+        }
+
+        currentAngle = Math.round(currentAngle / angleStep) * angleStep;
+        updateCarousel();
+        resetAutoSpin();
       }
-      
-      // Snap to exact card angle
-      currentAngle = Math.round(currentAngle / angleStep) * angleStep;
-      updateCarousel();
-      resetAutoSpin();
+
+      isTracking = false;
+      isHorizontalSwipe = false;
     };
 
     viewport.addEventListener("pointerup", handlePointerEnd);
