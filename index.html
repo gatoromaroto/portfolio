@@ -83,7 +83,7 @@
     <hr class="divider" />
 
     <!-- ============================================== -->
-    <!-- 3D SPINNING CAROUSEL (REPORTS / CLIENT STORIES) -->
+    <!-- 3D SPINNING & SWIPABLE CAROUSEL -->
     <!-- ============================================== -->
     <section class="carousel-section">
       <p class="section-label" id="section-carousel-label">CASOS DE SUCESSO & FEEDBACK</p>
@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <!-- Controls for Carousel -->
+      <!-- Carousel Navigation Arrows -->
       <div class="carousel-nav">
         <button id="prev-btn" class="nav-arrow-btn" aria-label="Previous card">‹</button>
         <button id="next-btn" class="nav-arrow-btn" aria-label="Next card">›</button>
@@ -286,7 +286,7 @@
     });
 
     // ==============================================
-    // 3D CAROUSEL SCRIPT LOGIC
+    // 3D SWIPABLE CAROUSEL LOGIC
     // ==============================================
     const ring = document.getElementById("carousel-ring");
     const viewport = document.getElementById("carousel-viewport");
@@ -297,11 +297,9 @@
     const totalCards = cards.length;
     let currentAngle = 0;
     const angleStep = 360 / totalCards;
-    
-    // Radius distance for 3D depth
-    const radius = Math.round((280 / 2) / Math.tan(Math.PI / totalCards)) + 20;
+    const radius = 190; // Optimized radius for clear 3D perspective
 
-    // Arrange cards in 3D circle
+    // Position cards in circle
     cards.forEach((card, index) => {
       const cardAngle = index * angleStep;
       card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
@@ -309,6 +307,12 @@
 
     function updateCarousel() {
       ring.style.transform = `rotateY(${currentAngle}deg)`;
+    }
+
+    let autoSpin;
+    function resetAutoSpin() {
+      clearInterval(autoSpin);
+      autoSpin = setInterval(rotateNext, 4200);
     }
 
     function rotateNext() {
@@ -321,23 +325,64 @@
       updateCarousel();
     }
 
-    nextBtn.addEventListener("click", rotateNext);
-    prevBtn.addEventListener("click", rotatePrev);
-
-    // Auto-spin interval
-    let autoSpin = setInterval(rotateNext, 3800);
-
-    // Pause on hover or touch
-    viewport.addEventListener("mouseenter", () => clearInterval(autoSpin));
-    viewport.addEventListener("mouseleave", () => {
-      clearInterval(autoSpin);
-      autoSpin = setInterval(rotateNext, 3800);
+    // Button clicks with timer reset
+    nextBtn.addEventListener("click", () => {
+      rotateNext();
+      resetAutoSpin();
     });
-    viewport.addEventListener("touchstart", () => clearInterval(autoSpin), { passive: true });
-    viewport.addEventListener("touchend", () => {
-      clearInterval(autoSpin);
-      autoSpin = setInterval(rotateNext, 3800);
+
+    prevBtn.addEventListener("click", () => {
+      rotatePrev();
+      resetAutoSpin();
     });
+
+    // Start auto spin
+    resetAutoSpin();
+
+    // ==============================================
+    // DRAG / SWIPE INTERACTION (Desktop Mouse & Touch)
+    // ==============================================
+    let isDragging = false;
+    let startX = 0;
+    let startAngle = 0;
+
+    viewport.addEventListener("pointerdown", (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startAngle = currentAngle;
+      clearInterval(autoSpin);
+      ring.style.transition = "none"; // Instant response during drag
+      viewport.setPointerCapture(e.pointerId);
+    });
+
+    viewport.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      const sensitivity = 0.45;
+      const tempAngle = startAngle + deltaX * sensitivity;
+      ring.style.transform = `rotateY(${tempAngle}deg)`;
+    });
+
+    const handlePointerEnd = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      ring.style.transition = "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)";
+      const deltaX = e.clientX - startX;
+      
+      if (deltaX < -40) {
+        currentAngle -= angleStep;
+      } else if (deltaX > 40) {
+        currentAngle += angleStep;
+      }
+      
+      // Snap to nearest clean card face
+      currentAngle = Math.round(currentAngle / angleStep) * angleStep;
+      updateCarousel();
+      resetAutoSpin();
+    };
+
+    viewport.addEventListener("pointerup", handlePointerEnd);
+    viewport.addEventListener("pointercancel", handlePointerEnd);
   </script>
 </body>
 </html>

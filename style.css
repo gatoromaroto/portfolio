@@ -8,7 +8,7 @@
   --divider: #e5e7eb;
   --btn-hover-bg: #000000;
   --btn-hover-text: #ffffff;
-  --card-shadow: rgba(0, 0, 0, 0.06);
+  --card-shadow: rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme="dark"] {
@@ -20,7 +20,7 @@
   --divider: #27272a;
   --btn-hover-bg: #ffffff;
   --btn-hover-text: #000000;
-  --card-shadow: rgba(0, 0, 0, 0.4);
+  --card-shadow: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -35,6 +35,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* PC-Safe Centered Layout */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);
@@ -42,13 +43,14 @@ body {
   min-height: 100vh;
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4.5rem 1.5rem 3rem;
+  flex-direction: column;
+  align-items: center; /* Aligns correctly without clipping tall content */
+  justify-content: flex-start;
+  padding: 5rem 1.5rem 4rem;
   overflow-x: hidden;
 }
 
-/* Controls pinned to the top */
+/* Top Controls Pinned to Top */
 .top-controls {
   position: absolute;
   top: 1.2rem;
@@ -56,6 +58,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  z-index: 50;
 }
 
 .control-link {
@@ -96,6 +99,7 @@ body {
   max-width: 620px;
   width: 100%;
   text-align: center;
+  margin: 0 auto;
 }
 
 /* Circular Avatar */
@@ -187,7 +191,7 @@ body {
 }
 
 /* ==============================================
-   3D CAROUSEL STYLES
+   3D CAROUSEL (Desktop & Mobile Optimized)
    ============================================== */
 .carousel-section {
   width: 100%;
@@ -199,37 +203,44 @@ body {
 
 .carousel-viewport {
   width: 100%;
+  max-width: 480px;
   height: 250px;
-  perspective: 1000px;
+  perspective: 1100px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: grab;
+  touch-action: pan-y; /* Allows natural vertical page scroll while capturing horizontal drag */
+  user-select: none;
+}
+
+.carousel-viewport:active {
+  cursor: grabbing;
 }
 
 .carousel-ring {
   width: 270px;
-  height: 210px;
+  height: 200px;
   position: absolute;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .carousel-card {
   position: absolute;
   width: 270px;
-  min-height: 200px;
+  min-height: 195px;
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 16px;
   padding: 1.1rem;
   text-align: left;
-  box-shadow: 0 10px 25px var(--card-shadow);
+  box-shadow: 0 8px 24px var(--card-shadow);
   backface-visibility: hidden;
-  user-select: none;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Card Header with Squared Round-Corner Avatar */
 .card-header {
   display: flex;
   align-items: center;
@@ -237,12 +248,13 @@ body {
 }
 
 .card-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px; /* Squircle rounded corners */
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   object-fit: cover;
   border: 1.5px solid var(--border);
   flex-shrink: 0;
+  pointer-events: none;
 }
 
 .card-meta {
@@ -250,7 +262,7 @@ body {
 }
 
 .card-name {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: var(--text-main);
   white-space: nowrap;
@@ -260,14 +272,14 @@ body {
 
 .card-role {
   font-size: 0.75rem;
-  font-weight: 400; /* Less bold */
+  font-weight: 400;
   color: var(--text-muted);
 }
 
 .card-divider {
   border: none;
   border-top: 1px solid var(--divider);
-  margin: 0.8rem 0;
+  margin: 0.75rem 0;
 }
 
 .card-story {
@@ -281,12 +293,12 @@ body {
 .carousel-nav {
   display: flex;
   gap: 0.8rem;
-  margin-top: 0.8rem;
+  margin-top: 1rem;
 }
 
 .nav-arrow-btn {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1.5px solid var(--border);
   background: transparent;
@@ -304,7 +316,7 @@ body {
   scroll-margin-top: 2rem;
 }
 
-/* Hover effects for mice */
+/* Desktop Hover Styles */
 @media (hover: hover) and (pointer: fine) {
   .control-btn:hover,
   .control-link:hover,
@@ -315,7 +327,7 @@ body {
   }
 }
 
-/* Click feedback */
+/* Active Press Feedback */
 .pill-btn:active,
 .control-btn:active,
 .control-link:active,
